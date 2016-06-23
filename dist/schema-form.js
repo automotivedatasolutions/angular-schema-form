@@ -695,6 +695,7 @@ angular.module('schemaForm').provider('schemaFormDecorators',
                             scope.ngModel.$validate();
                         } else {
                             scope.ngModel.$setViewValue(scope.ngModel.$viewValue);
+                            scope.ngModel.$render();
                         }
 
                           // Setting or removing a validity can change the field to believe its valid
@@ -2136,9 +2137,10 @@ angular.module('schemaForm').directive('sfField',
                       // Re-trigger model validator, that model itself would be re-validated
                       if (typeof scope.ngModel.$validate === 'function') {
                         scope.ngModel.$validate();
-                    } else {
-                        scope.ngModel.$setViewValue(scope.ngModel.$viewValue);
-                    }
+                       } else {
+                            scope.ngModel.$setViewValue(scope.ngModel.$viewValue);
+                            scope.ngModel.$render();
+                        }
 
                       // Setting or removing a validity can change the field to believe its valid
                       // but its not. So lets trigger its validation as well.
