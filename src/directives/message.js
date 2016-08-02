@@ -8,8 +8,8 @@ angular.module('schemaForm').directive('sfMessage',
   return {
     scope: false,
     restrict: 'EA',
+    template: '<div ng-if="!error && form.description" ng-bind-html="form.description"></div><div ng-if="error" ng-bind="(error | translate) || error"></div>',
     link: function(scope, element, attrs) {
-
       var message = '';
       if (attrs.sfMessage) {
         scope.$watch(attrs.sfMessage, function(msg) {
@@ -24,7 +24,7 @@ angular.module('schemaForm').directive('sfMessage',
       // Only call html() if needed.
       var setMessage = function(msg) {
         if (msg !== currentMessage) {
-          element.html(msg);
+          scope.error = msg;
           currentMessage = msg;
         }
       };
