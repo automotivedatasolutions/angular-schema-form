@@ -111,8 +111,14 @@ angular.module('schemaForm').directive('schemaValidate', ['sfValidator', '$parse
           // If we have specified a form name, and this model is not within
           // that form, then leave things be.
 
-          if(formName != undefined && ngModel.$$parentForm.$name !== formName) {
+          if(formName != undefined && ngModel.$$parentForm && ngModel.$$parentForm.$name !== formName) {
             return;
+          }
+
+          if (required) {
+              angular.forEach(required, function(field) {
+                  console.log(field);
+              })
           }
 
           // Special case: arrays
@@ -160,8 +166,8 @@ angular.module('schemaForm').directive('schemaValidate', ['sfValidator', '$parse
         });
 
         // Listen to an event so we can validate the input on request
-        scope.$on('schemaFormValidate', function(event, formName) {
-          scope.validateField(formName);
+        scope.$on('schemaFormValidate', function(event, formName, required) {
+          scope.validateField(formName, required);
         });
 
         scope.schemaError = function() {
