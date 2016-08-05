@@ -106,7 +106,7 @@ angular.module('schemaForm').directive('schemaValidate', ['sfValidator', '$parse
         var schema = form.schema;
 
         // A bit ugly but useful.
-        scope.validateField =  function(formName) {
+        scope.validateField =  function(formName, required) {
 
           // If we have specified a form name, and this model is not within
           // that form, then leave things be.
@@ -115,7 +115,7 @@ angular.module('schemaForm').directive('schemaValidate', ['sfValidator', '$parse
             return;
           }
 
-          if (required) {
+          if (required != undefined) {
               angular.forEach(required, function(field) {
                   console.log(field);
               })
