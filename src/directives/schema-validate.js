@@ -116,9 +116,15 @@ angular.module('schemaForm').directive('schemaValidate', ['sfValidator', '$parse
           }
 
           if (required != undefined) {
+              var partOfForm = false;
               angular.forEach(required, function(field) {
-                  console.log(field);
+                  if (field === schema.key) {
+                      partOfForm = true;
+                  }
               })
+              if (!partOfForm) {
+                  return;
+              }
           }
 
           // Special case: arrays
